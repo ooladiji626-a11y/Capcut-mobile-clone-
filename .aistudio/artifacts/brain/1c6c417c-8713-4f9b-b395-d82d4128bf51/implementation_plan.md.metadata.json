@@ -1,0 +1,6 @@
+{
+  "summary":  "Comprehensive timeline performance architecture fix for 100-300+ clip projects (12-20 minutes). Implements viewport windowing virtualization across VideoTrack, AudioTrack, and CaptionTrack; memoized clip item components; canvas/windowed ruler optimization; and decoupled high-frequency playhead/scrubbing updates for locked 60fps playback and instantaneous scrubbing.",
+  "updatedAt":  "2026-10-20T17:57:29.115513903Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}

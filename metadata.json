@@ -1,0 +1,6 @@
+{
+  "name": "CapCut Timeline Video Editor",
+  "description": "Mobile-first CapCut replica video editor featuring a Central Asset Bin & Media Storage pool, ChatGPT-style Chat History and New Chat session system inside the General AI Editor, persistent timeline and conversation state restoration, fixed-center playhead navigation, track trimming handles, audio waveforms, keyframing, transitions, speed curves with optical flow, AI video effects & body VFX tracking, AI chroma key & cutout backdrops, AI smart highlights auto-cutter, AI voiceover TTS, voice changers, SFX library, color grading LUTs, and auto-captions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

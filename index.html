@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      // Suppress Vite HMR WebSocket connection errors in sandboxed iframe environment
+      (function() {
+        if (typeof window !== 'undefined' && window.WebSocket) {
+          var OrigWebSocket = window.WebSocket;
+          window.WebSocket = function(url, protocols) {
+            if (protocols === 'vite-hmr' || (typeof url === 'string' && (url.includes('token=') || url.includes(':24678')))) {
+              var fakeWs = {
+                readyState: 1,
+                OPEN: 1,
+                CLOSED: 3,
+                CLOSING: 2,
+                CONNECTING: 0,
+                send: function() {},
+                close: function() {},
+                addEventListener: function(type, listener) {
+                  if (type === 'open') {
+                    setTimeout(listener, 0);
+                  }
+                },
+                removeEventListener: function() {},
+                dispatchEvent: function() { return true; }
+              };
+              return fakeWs;
+            }
+            return new OrigWebSocket(url, protocols);
+          };
+          window.WebSocket.prototype = OrigWebSocket.prototype;
+          window.WebSocket.OPEN = 1;
+          window.WebSocket.CLOSED = 3;
+          window.WebSocket.CLOSING = 2;
+          window.WebSocket.CONNECTING = 0;
+        }
+
+        window.addEventListener('unhandledrejection', function(event) {
+          var reason = event.reason;
+          if (
+            reason &&
+            (String(reason.message || reason).includes('WebSocket') ||
+             String(reason.message || reason).includes('vite') ||
+             String(reason.stack || '').includes('@vite/client'))
+          ) {
+            event.preventDefault();
+            if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+          }
+        }, true);
+
+        window.addEventListener('error', function(event) {
+          if (
+            (event.message && String(event.message).includes('WebSocket')) ||
+            (event.filename && String(event.filename).includes('@vite/client'))
+          ) {
+            event.preventDefault();
+            if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+          }
+        }, true);
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CapCut Timeline Video Editor</title>
+    <meta name="description" content="Mobile-first CapCut replica video editor featuring a Central Asset Bin & Media Storage pool, ChatGPT-style Chat History and New Chat session system inside the General AI Editor, persistent timeline and conversation state restoration, fixed-center playhead navigation, track trimming handles, audio waveforms, keyframing, transitions, speed curves with optical flow, AI video effects & body VFX tracking, AI chroma key & cutout backdrops, AI smart highlights auto-cutter, AI voiceover TTS, voice changers, SFX library, color grading LUTs, and auto-captions." />
+    <meta property="og:title" content="CapCut Timeline Video Editor" />
+    <meta property="og:description" content="Mobile-first CapCut replica video editor featuring a Central Asset Bin & Media Storage pool, ChatGPT-style Chat History and New Chat session system inside the General AI Editor, persistent timeline and conversation state restoration, fixed-center playhead navigation, track trimming handles, audio waveforms, keyframing, transitions, speed curves with optical flow, AI video effects & body VFX tracking, AI chroma key & cutout backdrops, AI smart highlights auto-cutter, AI voiceover TTS, voice changers, SFX library, color grading LUTs, and auto-captions." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
